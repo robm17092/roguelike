@@ -20,10 +20,22 @@ const scene = {
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         ]
 
+        //Define gameobjects
         const wall = 554
         const floor = 0
         const enemy = 27
         level = level.map(r => r.map(t => t == 1 ? wall : floor)) //Convert 1 to 554 
+
+        //Display tilemap
+        const tileSize = 16
+        const config = {
+            data: level,
+            tileWidth: tileSize,
+            tileHeight: tileSize,
+        }
+        const map = this.make.tilemap(config)
+        const tileset = map.addTilesetImage('tiles', 'tiles', tileSize, tileSize, 0, 1)
+        const ground = map.createStaticLayer(0, tileset, 0, 0)        
     },
     update: function () {
         //Movement controls for sprite
@@ -58,12 +70,13 @@ const scene = {
 
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 80*16,
+    height: 50*16,
     backgroundColor: "#123",
     parent: "game",
     pixelArt: true,
     scene: scene,
+    zoom: 2,
     physics: {
         default: "arcade",
         arcade: {
