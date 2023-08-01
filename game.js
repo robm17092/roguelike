@@ -1,11 +1,29 @@
 const scene = {
     preload: function () {
-        this.load.bitmapFont("arcade", "font/arcade.png", "font/arcade.xml");
+        this.load.bitmapFont("arcade", "font/arcade.png", "font/arcade.xml"); //Load arcade font
+        this.load.spritesheet('tiles', 'colored.png', { frameWidth: 16, frameHeight: 16, spacing: 1 }) //Load tilemap
     },
     create: function () {
         this.helloText = this.add.bitmapText(400, 300, "arcade", "MOVEMENT TEST").setOrigin(0.5);
         this.cursors = this.input.keyboard.createCursorKeys();
 
+        let level = [
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 1, 0, 0, 27, 0, 0, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        ]
+
+        const wall = 554
+        const floor = 0
+        const enemy = 27
+        level = level.map(r => r.map(t => t == 1 ? wall : floor)) //Convert 1 to 554 
     },
     update: function () {
         //Movement controls for sprite
